@@ -67,7 +67,7 @@ jobs:
           # Store the log as a GitHub step output
           echo "log_data<<EOF" >> $GITHUB_OUTPUT
           echo "$OCI_OUTPUT" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_MONTH_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
 
           # Check the log content for an error string.
           if echo "$OCI_OUTPUT" | grep -q -e '"ServiceError":' -e '"code":'; then
