@@ -104,9 +104,9 @@ Go to your forked repository on GitHub.
 
 #### **VM Secrets**
 
-* `COMPARTMENT_ID` (Value: Your Tenancy OCID from Step 2A)
+* `OCI_COMPARTMENT_ID` (Value: Your Tenancy OCID from Step 2A)
 * `IMAGE_ID` (Value: Your Image OCID from Step 2C)
-* `SUBNET_ID` (Value: Your Subnet OCID from Step 2C)
+* `OCI_SUBNET_ID` (Value: Your Subnet OCID from Step 2C)
 * `AD_NAME` (Value: Your Availability Domain name from Step 2C)
 * `SSH_PUBLIC_KEY` (Value: The `ssh-rsa...` key from Step 2D)
 
