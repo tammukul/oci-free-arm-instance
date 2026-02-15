@@ -44,13 +44,14 @@ jobs:
           chmod 600 ~/.oci/oci_api_key.pem
 
           echo "[DEFAULT]" > ~/.oci/config
-          # Robust sanitization: strip 'user=' prefix if present, remove quotes, take first line
-          echo "user=${{ secrets.OCI_CLI_USER }}" | head -n 1 | sed 's/^user=//' | tr -d '"' | tr -d "'" >> ~/.oci/config
-          echo "tenancy=${{ secrets.OCI_CLI_TENANCY }}" | head -n 1 | sed 's/^tenancy=//' | tr -d '"' | tr -d "'" >> ~/.oci/config
-          echo "fingerprint=${{ secrets.OCI_CLI_FINGERPRINT }}" | head -n 1 | sed 's/^fingerprint=//' | tr -d '"' | tr -d "'" >> ~/.oci/config
-          echo "key_file=~/.oci/oci_api_key.pem" >> ~/.oci/config
-          echo "region=${{ env.OCI_CLI_REGION }}" | head -n 1 | sed 's/^region=//' | tr -d '"' | tr -d "'" >> ~/.oci/config
+          # Robust sanitization: strip key prefix from secret if present, remove quotes, take first line, then prepend key
+          echo "${{ secrets.OCI_CLI_USER }}" | head -n 1 | sed 's/^user=//' | tr -d '"' | tr -d "'" | sed 's/^/user=/' >> ~/.oci/config
+          echo "${{ secrets.OCI_CLI_TENANCY }}" | head -n 1 | sed 's/^tenancy=//' | tr -d '"' | tr -d "'" | sed 's/^/tenancy=/' >> ~/.oci/config
+          echo "${{ secrets.OCI_CLI_FINGERPRINT }}" | head -n 1 | sed 's/^fingerprint=//' | tr -d '"' | tr -d "'" | sed 's/^/fingerprint=/' >> ~/.oci/config
+          echo "key_file=/home/runner/.oci/oci_api_key.pem" >> ~/.oci/config
+          echo "${{ env.OCI_CLI_REGION }}" | head -n 1 | sed 's/^region=//' | tr -d '"' | tr -d "'" | sed 's/^/region=/' >> ~/.oci/config
           echo "${{ secrets.SSH_PUBLIC_KEY }}" > /home/runner/my_ssh_key.pub
+
 
 
 
